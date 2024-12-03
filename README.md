@@ -1,5 +1,5 @@
 # conky
-My conky config
+My conky config needs conky.conf and ConkyWeather.sh
 
 Playing with conky for the first time. I have the location for files hard coded in the conf and sh file so that might have to change.
 The conf file calls the script to read the weather
