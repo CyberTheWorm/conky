@@ -7,8 +7,6 @@
 # Variables
 # get your city id at https://openweathermap.org/find and replace
 city_id=6159905
-#lat=49.1064
-#lon=-122.8251
 # replace with yours
 api_key=5ef1fab8b0dcee08c31198b75f457d30
 
