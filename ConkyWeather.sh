@@ -22,20 +22,24 @@ unit=metric
 lang=en
 
 # Main command
+# Read data and save as a json file
 url="api.openweathermap.org/data/2.5/weather?id=${city_id}&appid=${api_key}&mode=${mode_type}&cnt=5&units=${unit}&lang=${lang}"
 curl ${url} -s -o ~/.config/conky/weather.${mode_type}
 
-
+#Convert unix time to human time for when the data was updated
 updated_unix_time="$(jq '.dt' ~/.config/conky/weather.${mode_type})"
 timezone="$(jq '.timezone' ~/.config/conky/weather.${mode_type})"
 adjusted_updated_time=$(($updated_unix_time + $timezone))
 
+#Convert unix time to human time for sunrise
 sunrise_unix_time="$(jq '.sys.sunrise' ~/.config/conky/weather.${mode_type})"
 adjusted_sunrise_time=$(($sunrise_unix_time + $timezone))
 
+#Convert unix time to human time for sunset
 sunset_unix_time="$(jq '.sys.sunset' ~/.config/conky/weather.${mode_type})"
 adjusted_sunset_time=$(($sunset_unix_time + $timezone))
 
+# Save time in txt file for reading in conky
 converted_updated_time=$(date -u -d "@$adjusted_updated_time" +"%Y-%m-%d %H:%M:%S")
 echo "$converted_updated_time" > ~/.config/conky/updated.txt
 
